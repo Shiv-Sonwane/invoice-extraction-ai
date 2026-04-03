@@ -1,11 +1,11 @@
 import os
-from google import genai
+import google.generativeai as genai
 import json
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 def parse_invoice(text: str):
     prompt = f"""
@@ -27,20 +27,24 @@ Format:
 Text:
 {text}
 """
-    models = [
-        "models/gemini-flash-latest",   # primary
-        "models/gemini-2.0-flash",      # fallback
-        "models/gemini-pro-latest"      # backup
-    ]
-    
 
+    models = genai.list_models()
 
     for model in models:
+        print(model.name)
+
+
+    models = [
+        "models/gemini-2.5-flash",
+        "models/gemini-2.5-pro",
+        "models/gemini-2.0-flash",
+        "models/gemini-2.0-flash-001"
+    ]
+
+    for model_name in models:
         try:
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-            )
+            model = genai.GenerativeModel(model_name)
+            response = model.generate_content(prompt)
 
             content = response.text
             content = content.replace("```json", "").replace("```", "").strip()
@@ -48,10 +52,11 @@ Text:
             return json.loads(content)
 
         except Exception as e:
-            print(f"Model {model} failed:", e)
+            print(f"Model {model_name} failed:", e)
             continue
 
     return {"error": "All models failed"}
+
 
 def calculate_confidence(data):
     score = 0
