@@ -11,7 +11,7 @@ function App() {
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const fileInputRef = useRef();
 
-  const API = "http://127.0.0.1:8000";
+  const API = import.meta.env.VITE_API_URL;
 
   const handleUpload = async () => {
     if (!file) return alert("Please select a file");
