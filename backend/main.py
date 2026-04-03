@@ -14,13 +14,13 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow all (for dev)
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# temp folder for OCR
+
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -34,7 +34,7 @@ def home():
 async def upload_file(file: UploadFile = File(...)):
     file_bytes = await file.read()
 
-    # ✅ Step 0: Validate file type
+
     allowed_extensions = [".jpg", ".jpeg", ".png", ".webp", ".pdf"]
     ext = os.path.splitext(file.filename)[1].lower()
 
@@ -47,29 +47,26 @@ async def upload_file(file: UploadFile = File(...)):
     if not ext:
         ext = ".jpg"
 
-    # ✅ Step 1: Save temp file for OCR
     temp_path = f"{UPLOAD_DIR}/{uuid.uuid4()}{ext}"  
 
     with open(temp_path, "wb") as f:
         f.write(file_bytes)
  
-    # ✅ Step 2: OCR
+
     text = extract_text(temp_path)
 
-    # ✅ Step 3: LLM parsing
     structured_data = parse_invoice(text)
 
     # handle LLM error
     if "error" in structured_data:
         return {"error": "LLM parsing failed", "details": structured_data["error"]}
 
-    # ✅ Step 4: Validation
+  
     data = validate_invoice(structured_data)
 
-    # ✅ Step 5: Confidence
+
     confidence = calculate_confidence(data)
 
-    # ✅ Step 6: Duplicate check
     existing = supabase.table("invoices") \
         .select("*") \
         .eq("invoice_number", data["invoice_number"]) \
@@ -83,7 +80,6 @@ async def upload_file(file: UploadFile = File(...)):
             "confidence": confidence
         }
 
-    # ✅ Step 7: Upload to Supabase Storage
     file_name = f"{uuid.uuid4()}-{file.filename}"
 
     supabase.storage.from_("invoices").upload(
@@ -93,7 +89,6 @@ async def upload_file(file: UploadFile = File(...)):
 
     file_url = supabase.storage.from_("invoices").get_public_url(file_name)
 
-    # ✅ Step 8: Save to DB
     supabase.table("invoices").insert({
         "vendor_name": data["vendor_name"],
         "invoice_number": data["invoice_number"],
