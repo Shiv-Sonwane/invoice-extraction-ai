@@ -126,7 +126,7 @@ An AI-powered application that extracts structured data from invoice documents (
 ---
 
 ## 📂 Project Structure
-
+```bash
 project-root/
 │
 ├── backend/
@@ -143,6 +143,7 @@ project-root/
 │ └── App.css
 │
 └── README.md
+```
 
 
 ---
@@ -189,17 +190,27 @@ npm run dev
 
 
 ### ⚠️ Assumptions & Limitations
+
 -OCR accuracy depends on image quality
+
 -Different invoice formats may affect extraction
+
 -Free API limits may restrict AI usage
+
 -Date formats may vary across invoices
 
 
+
 ### 🔮 Future Improvements
+
 -Format detection & reuse system
+
 -Batch invoice processing
+
 -Improved UI with charts
+
 -Vendor normalization
+
 
 
 ### 🌐 Live Demo
