@@ -19,7 +19,11 @@ function App() {
     formData.append("file", file);
     setLoading(true);
     try {
-      const res = await axios.post(`${API}/upload`, formData);
+      const res = await axios.post(`${API}/upload`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+      });
       setResult(res.data);
     } catch (err) {
       alert("Upload failed");
