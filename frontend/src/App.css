@@ -1,0 +1,217 @@
+
+/* 
+.container {
+  min-height: 100vh;
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #eef2f3, #dfe9f3);
+}
+
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+  margin-bottom: 10px;
+}
+
+
+.button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #45a049;
+}
+
+.pre {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+} 
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f5f4;
+  color: #1c1c1a;
+}
+
+/* Header */
+.header {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e3;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  font-size: 12px;
+  color: #888;
+  background: #f0f0ee;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* Main */
+.main {
+  max-width: 580px;
+  margin: 32px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border: 1px solid #e5e5e3;
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+/* Dropzone */
+.dropzone {
+  border: 1.5px dashed #d0d0ce;
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dropzone:hover {
+  border-color: #6366f1;
+  background: #fafafa;
+}
+
+.file-prompt {
+  font-size: 14px;
+  color: #666;
+}
+
+.file-prompt span {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.file-selected {
+  font-size: 14px;
+  color: #16a34a;
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+  padding: 9px 18px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #6366f1;
+  color: #fff;
+  width: 100%;
+}
+
+.btn-primary:not(:disabled):hover { opacity: 0.85; }
+
+.btn-secondary {
+  background: #f0f0ee;
+  color: #333;
+  border: 1px solid #e0e0de;
+}
+
+.btn-secondary:not(:disabled):hover { background: #e8e8e6; }
+
+/* Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table tr + tr td {
+  border-top: 1px solid #f0f0ee;
+}
+
+.table-label {
+  font-size: 12px;
+  color: #888;
+  padding: 9px 0;
+  width: 38%;
+  font-weight: 500;
+}
+
+.table-value {
+  font-size: 13px;
+  color: #1c1c1a;
+  padding: 9px 0;
+  font-weight: 500;
+}
+
+/* JSON */
+.json-out {
+  background: #f8f8f6;
+  border: 1px solid #ececea;
+  border-radius: 7px;
+  padding: 14px;
+  font-size: 12px;
+  color: #555;
+  overflow-x: auto;
+  line-height: 1.65;
+  white-space: pre;
+}
